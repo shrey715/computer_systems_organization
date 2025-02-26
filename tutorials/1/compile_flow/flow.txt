@@ -1,0 +1,1 @@
+main.c > main.i > main.s > main.o > main
