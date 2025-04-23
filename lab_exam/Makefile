@@ -59,26 +59,26 @@ q9g:
 	gcc $(CFLAGS) q09/q9.c q09/q9.s -o q9 && gdb ./q9 && rm q9
 
 q10:
-	gcc $(CFLAGS) q10/q10.c q10/q10.s -o q10 && ./q10 && rm q10
+	gcc $(CFLAGS) q10/q10.c q10/q10.s -o q10_exe && ./q10_exe && rm q10_exe
 
 q10g:
-	gcc $(CFLAGS) q10/q10.c q10/q10.s -o q10 && gdb ./q10 && rm q10
+	gcc $(CFLAGS) q10/q10.c q10/q10.s -o q10_exe && gdb ./q10_exe && rm q10_exe
 
 q11:
-	gcc $(CFLAGS) q11/q11.c q11/q11.s -o q11 && ./q11 && rm q11
+	gcc $(CFLAGS) q11/q11.c q11/q11.s -o q11_exe && ./q11_exe && rm q11_exe
 
 q11g:
-	gcc $(CFLAGS) q11/q11.c q11/q11.s -o q11 && gdb ./q11 && rm q11
+	gcc $(CFLAGS) q11/q11.c q11/q11.s -o q11_exe && gdb ./q11_exe && rm q11_exe
 
 q12:
-	gcc $(CFLAGS) q12/q12.c q12/q12.s -o q12 && ./q12 && rm q12
+	gcc $(CFLAGS) q12/q12.c q12/q12.s -o q12_exe && ./q12_exe && rm q12_exe
 
 q12g:
-	gcc $(CFLAGS) q12/q12.c q12/q12.s -o q12 && gdb ./q12 && rm q12
+	gcc $(CFLAGS) q12/q12.c q12/q12.s -o q12_exe && gdb ./q12_exe && rm q12_exe
 
 # Clean all generated files
 clean:
-	rm -f q1 q2 q3 q4 q5 q6 q7 q8 q9 q10 q11 q12
+	rm -f q1 q2 q3 q4 q5 q6 q7 q8 q9 q10_exe q11_exe q12_exe
 	find . -name "*.o" -type f -delete
 
 # Phony targets

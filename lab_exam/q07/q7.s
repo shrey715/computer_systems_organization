@@ -12,8 +12,8 @@ factorial:
     dec %rdi
     call factorial
     popq %rdi
-    # Multiply the result with n
-    imul %rdi, %rax
+    # multiply the result with n
+    imulq %rdi, %rax
     ret
 
 .base_case:
