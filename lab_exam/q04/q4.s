@@ -16,43 +16,30 @@ sum:
 
     movq $0, %r12 # sum=0
     movq $0, %r13 # i=0
+    movq %rdi, %r15 # rows
+    imul %r15, %rsi # cols
+    movq %rsi, %r15 # rows*cols
 
-.outer:
-    cmpq %rdi, %r13
-    jge .outer_done # i>=rows, break
-    movq $0, %r14 # j=0
+.loop:
+    cmpq %r15, %r13 # i >= rows*cols?
+    jge .done
 
-.inner:
-    cmpq %rsi, %r14
-    jge .inner_done # j>=cols, break
-
-    # arr[i][j] = arr[i*cols+j]
-    movq %r13, %r15
-    imulq %rsi, %r15 # i*cols
-    addq %r14, %r15 # i*cols+j
-    movq (%rcx, %r15, 8), %rax # arr[i][j] in rax
-    
-    #divisibility check
+    movq (%rcx,%r13,8), %rax # arr[i]
     cqto
-    idivq %r8 # divisor=3
-    cmpq $0, %rdx
-    jne .inner_break # needs to be divisible by 3
-    idivq %r9 # divisor=5
-    cmpq $0, %rdx
-    je .inner_break # needs to not be divisible by 5
+    idivq %r8 # arr[i]/3
+    cmpq $0, %rdx # arr[i]%3 == 0?
+    jne .next
 
-    # add to sum
-    addq (%rcx, %r15, 8), %r12 # sum += arr[i][j]
+    idivq %r9 # arr[i]/5
+    cmpq $0, %rdx # arr[i]%5 == 0?
+    je .next
 
-.inner_break:
-    incq %r14 # j++
-    jmp .inner
-
-.inner_done:
+    addq (%rcx,%r13,8), %r12 # sum += arr[i]
+.next:    
     incq %r13 # i++
-    jmp .outer
+    jmp .loop
 
-.outer_done:
+.done:
     movq %r12, %rax # return sum
     popq %r15
     popq %r14
