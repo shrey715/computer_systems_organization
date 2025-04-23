@@ -10,7 +10,7 @@
 extern bool is_palindrome(char* s);
 
 int main(){
-    char s[200000];
+    char s[100];
     scanf("%s", s);
 
     if (is_palindrome(s)) {

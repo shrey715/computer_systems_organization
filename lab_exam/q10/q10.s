@@ -8,8 +8,8 @@ is_balanced:
 
     pushq %rbp
     movq %rsp, %rbp
-    subq %rsi, %rsp 
-    andq $-16, %rsp 
+    leaq (,%rsi,8), %r10 # n bytes for str
+    subq %r10, %rsp # allocate space on stack
            
     xorq %rcx, %rcx # i = 0
     xorq %r8, %r8 # top = -1 (stack will start at top = 0)
